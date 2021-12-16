@@ -26,12 +26,12 @@
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
 
     // the link to your model provided by Teachable Machine export panel
-    const URL = "./my_model/";
+    const URL = "https://teachablemachine.withgoogle.com/models/Hmh64-IUo/";
     let model, webcam, ctx, labelContainer, maxPredictions;
 
     async function init() {
-        const modelURL = URL + "model.json";
-        const metadataURL = URL + "metadata.json";
+        const modelURL = https://teachablemachine.withgoogle.com/models/Hmh64-IUo/model.json;
+        const metadataURL = https://teachablemachine.withgoogle.com/models/Hmh64-IUo/metadata.json;
 
         // load the model and metadata
         // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
@@ -42,8 +42,8 @@
         // Convenience function to setup a webcam
         const size = 200;
         const flip = true; // whether to flip the webcam
-        webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
-        await webcam.setup(); // request access to the webcam
+        webcam = new tmImage.Webcam(200, 200);
+        await webcam.setup();
         await webcam.play();
         window.requestAnimationFrame(loop);
 
@@ -57,9 +57,9 @@
         }
     }
 
-    async function loop(timestamp) {
-        webcam.update(); // update the webcam frame
-        await predict();
+    async function loop() {
+        const prediction = await model.predict(webcam.canvas);
+        webcam.update();
         window.requestAnimationFrame(loop);
     }
 
